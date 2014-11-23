@@ -1,6 +1,8 @@
 # Nimmt
 
-ニムトが遊べるRubyのお遊びスクリプトです。
+Nimmtは、名作カードゲーム『6ニムト!』がターミナル上で遊べるRubyのスクリプトです。
+
+[6ニムト! - Wikipedia](http://ja.wikipedia.org/wiki/6%E3%83%8B%E3%83%A0%E3%83%88!)
 
 ## Requirements
 
