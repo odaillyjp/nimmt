@@ -1,19 +1,18 @@
 module Nimmt
   class Controller
-    def initialize
+    def initialize(players_number: 1, computers_number: 3)
       @players = []
       @cards = Card.all.shuffle
       @rows = Row.all
 
-      # 人間プレイヤーが1人、NPCが3人
-      @players << Player.new(name: "あなた")
-      3.times { |idx| @players << ComputerPlayer.new(name: "コンピュータ#{idx + 1}") }
+      players_number.times { @players << Player.new(name: "あなた") }
+      computers_number.times { |idx| @players << ComputerPlayer.new(name: "コンピュータ#{idx + 1}") }
 
       # プレイヤーにカードを10枚配る
       @players.each { |player| player.set_hand_cards(@cards.pop(10)) }
 
       # 場にカードをセットする
-      @rows.each { |row| row.cards << @cards.pop }
+      @rows.each { |row| row.place_card(@cards.pop) }
     end
 
     def start
@@ -173,25 +172,25 @@ module Nimmt
   end
 
   class Row
-    attr_accessor :cards, :idx
+    attr_reader :cards, :idx
 
     def self.all
       rows = []
-      4.times { |idx| rows << Row.new(idx + 1) }
+      4.times { |idx| rows << Row.new(idx: idx + 1) }
       rows
     end
 
-    def initialize(idx)
+    def initialize(idx: 1)
       @cards = []
       @idx   = idx
     end
 
-    def has_card?(card)
-      @cards.any? { |c| c == card }
-    end
-
     def place_card(card)
       @cards.push(card)
+    end
+
+    def has_card?(card)
+      @cards.any? { |c| c == card }
     end
 
     def clear
