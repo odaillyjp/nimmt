@@ -91,8 +91,7 @@ module Nimmt
   end
 
   class Player
-    attr_reader   :hand_cards, :name
-    attr_accessor :token_cards
+    attr_reader   :hand_cards, :name ,:token_cards
 
     def initialize(name: '名無し')
       @hand_cards  = []
