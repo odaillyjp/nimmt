@@ -174,9 +174,7 @@ module Nimmt
     attr_reader :cards, :idx
 
     def self.all
-      rows = []
-      4.times { |idx| rows << Row.new(idx: idx + 1) }
-      rows
+      4.times.map { |idx| Row.new(idx: idx + 1) }
     end
 
     def initialize(idx: 1)
